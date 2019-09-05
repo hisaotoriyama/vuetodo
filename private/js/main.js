@@ -73,8 +73,8 @@ var app = new Vue({
          method: "GET"
       };
       var self = this
-      this.name_selected = Cookies.get('Name');
-      console.log(Cookies.get('Name'))
+      this.name_selected = Cookies.get('name');
+      // console.log(Cookies.get('name'))
       fetch('/vuetodos?name=' + this.name_selected, d).then((d) => {
        return new Promise((res, rej) => {
          d.json().then((j) => {

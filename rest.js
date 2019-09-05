@@ -14,21 +14,21 @@ let db = require('./models/index')
 // register REST controllers
 app.resource('vuetodos', require('./controllers/vuetodo'), {id: 'id'})
 app.resource('users', require('./controllers/user'), {id: 'id'})
-// app.resource('logins', require('./controllers/login'), {id: 'id'})
-//POSTだけでいいのでresourceは使わない！
+// app.resource('logins', require('./controllers/login'), {id: 'id'})とはしない。POSTだけでいいのでresourceは使わない！
+// 他のシート(今回の場合public/main.js)で/loginとなった場合、ここを読み込みに来る。
 app.post('/login', (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     db.user.findOne({
         where:{
             name: req.body.loginName
         }
     }).then((d)=> {console.log(d);
-    console.log(req.body.loginPassword)
-    console.log(d.password)
+    // console.log(req.body.loginPassword)
+    // console.log(d.password)
     if(req.body.loginPassword==d.password){
         console.log("OK")
         res.cookie('login',true)
-        res.cookie('Name',req.body.loginName)
+        res.cookie('name',req.body.loginName)
         res.send(200)
     } else {
         console.log("NG")
@@ -38,6 +38,7 @@ app.post('/login', (req, res) => {
     })
 })
 app.get('/logout',(req,res)=>{
+    //今までlongin=trueであったものをBlankにし、login:trueを無効にする。
     res.cookie("login")
     res.redirect("/login.html")
 })
@@ -48,6 +49,7 @@ let isLogin = (req, res, next) => {
         next();  // これによりapp.use isLoginのあとのexpress.static( path.join( __dirname, '/private' )) に移る。
     } else {
     //windows.alert("NameないしPasswordが異なっています")//→alert使えない。なぜ？？？？
+    // redirectはサーバーサイド、main.jsのlocation.hrefはブラウザサイド 
         res.redirect('/login.html')
     }
 }
