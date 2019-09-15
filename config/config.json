@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "password",
-    "database": "vuetodo_development",
+    "database": "vuetodo_cookies_development",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

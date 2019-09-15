@@ -4,44 +4,27 @@ let express = require('express')
 let Res = require('express-resource')
 let cp = require('cookie-parser')
 let path = require('path')
+let login = require('./routes/login')
+let logout = require('./routes/logout')
 let app = express()
+
+let bodyParser = require('body-parser');
+let db = require('./models/index')
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 app.use(cp())
 app.use(express.json())
-
-let db = require('./models/index')
+app.use('/login', login)// app.resource('logins', require('./controllers/login'), {id: 'id'})とはしない。POSTだけでいいのでresourceは使わない！
+// 他のシート(今回の場合public/main.js)で/loginとなった場合、ここを読み込みに来る。
+app.use('/logout', logout)
 
 // register REST controllers
 app.resource('vuetodos', require('./controllers/vuetodo'), {id: 'id'})
 app.resource('users', require('./controllers/user'), {id: 'id'})
-// app.resource('logins', require('./controllers/login'), {id: 'id'})とはしない。POSTだけでいいのでresourceは使わない！
-// 他のシート(今回の場合public/main.js)で/loginとなった場合、ここを読み込みに来る。
-app.post('/login', (req, res) => {
-    // console.log(req.body);
-    db.user.findOne({
-        where:{
-            name: req.body.loginName
-        }
-    }).then((d)=> {console.log(d);
-    // console.log(req.body.loginPassword)
-    // console.log(d.password)
-    if(req.body.loginPassword==d.password){
-        console.log("OK")
-        res.cookie('login',true)
-        res.cookie('name',req.body.loginName)
-        res.send(200)
-    } else {
-        console.log("NG")
-        res.cookie('login',false)
-        res.send(200)    
-    }
-    })
-})
-app.get('/logout',(req,res)=>{
-    //今までlongin=trueであったものをBlankにし、login:trueを無効にする。
-    res.cookie("login")
-    res.redirect("/login.html")
-})
 
 let isLogin = (req, res, next) => {
     // console.log(">>"+req.cookies.login)

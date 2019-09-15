@@ -21,7 +21,7 @@
                         自分の名前
                       </a>
                   
-                      <div class="dropdown-menu" v-model="name_selected">
+                      <!-- <div class="dropdown-menu" v-model="name_selected">
                         <option class="dropdown-item" href="#">Hisao</option>
                         <a class="dropdown-item" href="#">Yoshiko</a>
                         <a class="dropdown-item" href="#">Seitaro</a>
@@ -29,14 +29,14 @@
                         <a class="dropdown-item" href="#">Masayuki</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
-                      </div>
+                      </div> -->
                     </li>
                   </ul>
             </nav>
       </div>
 
       <div class="row">
-        <div class="col-md-2" style="background-color:blue">
+        <!-- <div class="col-md-2" style="background-color:blue">
                 <select id="name" v-model="name_selected"> 
                     <option>Hisao</option>
                     <option>Yoshiko</option>
@@ -44,7 +44,7 @@
                     <option>Yuki</option>
                     <option>Masayuki</option>
                 </select>
-        </div>
+        </div> -->
 
         <!-- <div class="col-md-10" style="background-color:blue">
             <form　v-on:submit.prevent class="col-3">
@@ -96,7 +96,7 @@
 
 
       </div>
-
+      <pre>{{$data.name_selected}}</pre>
       <!-- <pre>{{$data.revisedTodos}}</pre> -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
