@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('vuetodotables_cookies', {
+    return queryInterface.createTable('vuetodotable_cookies', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -21,12 +21,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       created_at: {
-        type: Sequelize.DATE
-      },
-      updated_at: {
-        type: Sequelize.DATE
-      },
-      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
@@ -37,6 +31,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('vuetodotables_cookies');
+    return queryInterface.dropTable('vuetodotable_cookies');
   }
 };
