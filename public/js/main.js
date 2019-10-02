@@ -158,7 +158,7 @@ var app = new Vue({
         var self = this;
         fetch('/adduser', d).then((res) =>  
             // res.redirect('../private/todo.html',this.newName)
-            location.href = "/secureloggedin/todo.html" 
+            location.href = res.url
             )  
         
         this.newName = "";
