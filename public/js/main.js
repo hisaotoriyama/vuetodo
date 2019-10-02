@@ -139,7 +139,7 @@ var app = new Vue({
         return fetch('/vuetodos/'+v.id, d);
       },
   
-      createUser:function(){
+      addUser:function(){
         if (this.newName == "") return;
         const data = {
           "name": this.newName,
@@ -156,18 +156,12 @@ var app = new Vue({
         };
   
         var self = this;
-        fetch('/users', d).then((d) => {
-          return new Promise((res,rej) => {
-            d.json().then((j) => {
-              self.userLists = j;
-              res();
-            })
-          })
-        })
-        .then((res) =>  res.redirect('../private/todo.html',this.newName)
-        );
+        fetch('/adduser', d).then((res) =>  
+            // res.redirect('../private/todo.html',this.newName)
+            location.href = "/secureloggedin/todo.html" 
+            )  
+        
         this.newName = "";
-        this.email="";
         this.newPassword="";
       },
   

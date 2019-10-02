@@ -26,7 +26,7 @@ var app = new Vue({
   //   })
   // },
   mounted:　function() {
-    console.log(req.cookies.name);
+    console.log("tekitou");
     // this.name_selected=req.cookies.name;
     this.readItem(this.name_selected)
   },

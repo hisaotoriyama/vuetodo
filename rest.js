@@ -4,8 +4,9 @@ let express = require('express')
 let Res = require('express-resource')
 let cp = require('cookie-parser')
 let path = require('path')
-let login = require('./routes/login')
-let logout = require('./routes/logout')
+let login   = require('./routes/login')
+let logout  = require('./routes/logout')
+let adduser = require('./routes/adduser')
 let app = express()
 
 let bodyParser = require('body-parser');
@@ -21,6 +22,7 @@ app.use(express.json())
 app.use('/login', login)// app.resource('logins', require('./controllers/login'), {id: 'id'})とはしない。POSTだけでいいのでresourceは使わない！
 // 他のシート(今回の場合public/main.js)で/loginとなった場合、ここを読み込みに来る。
 app.use('/logout', logout)
+app.use('/adduser', adduser)
 
 // register REST controllers
 app.resource('vuetodos', require('./controllers/vuetodo'), {id: 'id'})
@@ -37,8 +39,9 @@ let isLogin = (req, res, next) => {
     }
 }
 
-app.use( '/secure', isLogin, express.static( path.join( __dirname, '/private' )) );
-app.use( express.static( 'public'));
+app.use('/secure', isLogin, express.static(path.join(__dirname,'/private')));
+app.use('/secureloggedin', express.static(path.join(__dirname,'/private')));
+app.use(express.static('public'));
 
 // start application
 app.listen(3020)
